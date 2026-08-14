@@ -79,7 +79,7 @@
 
     <h3>₹199</h3>
 
-    <button type="button">
+    <button type="button" onclick="buyNow()">
         Buy Now
     </button>
 
@@ -346,6 +346,14 @@
               searchName();
 
           }
+
+         function buyNow() {
+
+             document.getElementById("name").scrollIntoView();
+
+             document.getElementById("name").focus();
+
+         }
 
     </script>
 
