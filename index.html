@@ -76,8 +76,7 @@
         }
 
         input,
-        textarea,
-        select {
+        textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -203,7 +202,6 @@
     <div class="checkout" id="checkout">
 
         <h2>Order Details</h2>
-
 
         <div class="order-summary">
 
@@ -336,10 +334,19 @@
 
     <script>
 
+        // ==========================================
+        // APNA WHATSAPP NUMBER YAHAN DAALO
+        // Country code ke saath, + ke bina
+        // Example: 919876543210
+        // ==========================================
+
+        const whatsappNumber = "919XXXXXXXXX";
+
 
         function buyNow() {
 
-            let checkout = document.getElementById("checkout");
+            let checkout =
+                document.getElementById("checkout");
 
             checkout.style.display = "block";
 
@@ -353,7 +360,8 @@
 
         function closeCheckout() {
 
-            document.getElementById("checkout").style.display = "none";
+            document.getElementById("checkout")
+                .style.display = "none";
 
         }
 
@@ -361,7 +369,9 @@
         function calculateTotal() {
 
             let quantity =
-                Number(document.getElementById("quantity").value);
+                Number(
+                    document.getElementById("quantity").value
+                );
 
             if (quantity < 1 || isNaN(quantity)) {
 
@@ -381,25 +391,33 @@
         function placeOrder() {
 
             let name =
-                document.getElementById("customerName").value.trim();
+                document.getElementById("customerName")
+                .value.trim();
 
             let mobile =
-                document.getElementById("customerMobile").value.trim();
+                document.getElementById("customerMobile")
+                .value.trim();
 
             let address =
-                document.getElementById("address").value.trim();
+                document.getElementById("address")
+                .value.trim();
 
             let pincode =
-                document.getElementById("pincode").value.trim();
+                document.getElementById("pincode")
+                .value.trim();
 
             let quantity =
-                Number(document.getElementById("quantity").value);
+                Number(
+                    document.getElementById("quantity").value
+                );
 
             let payment =
                 document.querySelector(
                     'input[name="payment"]:checked'
                 ).value;
 
+
+            // NAME CHECK
 
             if (name === "") {
 
@@ -408,6 +426,8 @@
 
             }
 
+
+            // MOBILE CHECK
 
             if (mobile === "") {
 
@@ -425,6 +445,8 @@
             }
 
 
+            // ADDRESS CHECK
+
             if (address === "") {
 
                 alert("Please enter your full address");
@@ -432,6 +454,8 @@
 
             }
 
+
+            // PINCODE CHECK
 
             if (pincode === "") {
 
@@ -449,6 +473,8 @@
             }
 
 
+            // QUANTITY CHECK
+
             if (quantity < 1) {
 
                 alert("Quantity must be at least 1");
@@ -457,37 +483,61 @@
             }
 
 
+            // TOTAL
+
             let total = quantity * 199;
 
 
-            if (payment === "UPI") {
+            // WHATSAPP MESSAGE
 
-                alert(
-                    "UPI payment setup will be connected next.\n\n" +
-                    "Order Amount: ₹" + total
-                );
+            let message =
+                "NEW ORDER\n\n" +
 
-                return;
+                "Product: Necklace\n" +
 
-            }
+                "Price: ₹199\n" +
+
+                "Quantity: " + quantity + "\n" +
+
+                "Total Amount: ₹" + total + "\n\n" +
+
+                "CUSTOMER DETAILS\n\n" +
+
+                "Name: " + name + "\n" +
+
+                "Mobile: " + mobile + "\n" +
+
+                "Address: " + address + "\n" +
+
+                "Pincode: " + pincode + "\n\n" +
+
+                "Payment Method: " + payment;
 
 
-            document.getElementById("orderMessage").innerText =
-                "Order Placed Successfully! " +
-                "Total Amount: ₹" + total +
-                " | Payment: Cash on Delivery";
+            // WHATSAPP LINK
+
+            let whatsappURL =
+                "https://wa.me/" +
+                whatsappNumber +
+                "?text=" +
+                encodeURIComponent(message);
 
 
-            document.getElementById("customerName").value = "";
-            document.getElementById("customerMobile").value = "";
-            document.getElementById("address").value = "";
-            document.getElementById("pincode").value = "";
-            document.getElementById("quantity").value = 1;
+            // SUCCESS MESSAGE
 
-            document.getElementById("total").innerText = 199;
+            document.getElementById("orderMessage")
+                .innerText =
+                "Order details ready. Opening WhatsApp...";
+
+
+            // OPEN WHATSAPP
+
+            window.open(
+                whatsappURL,
+                "_blank"
+            );
 
         }
-
 
     </script>
 
