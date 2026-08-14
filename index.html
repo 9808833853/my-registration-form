@@ -1,65 +1,169 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First Form</title>
+    <title>My Online Store</title>
 
     <style>
 
         body {
             font-family: Arial;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 30px;
         }
 
-        input {
-            width: 300px;
-            height: 35px;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
+        .product-card {
+            width: 320px;
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        .namebox {
-            background-color: lightblue;
-        }
-
-        .submitbtn {
-            width: 120px;
-            height: 40px;
-            background-color: green;
-            color: white;
+        .product-card img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
             border-radius: 8px;
-            border: none;
         }
 
-        #message {
-            color: green;
-            font-size: 20px;
+        .product-card h2 {
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-size: 22px;
             font-weight: bold;
+            margin: 10px;
         }
 
-        .formbox {
+        .buybtn {
+            width: 180px;
+            height: 45px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .buybtn:hover {
+            background-color: #e68900;
+        }
+
+        .checkout {
+            display: none;
             width: 500px;
+            background-color: white;
             padding: 25px;
-            border: 1px solid gray;
+            margin: 30px auto;
             border-radius: 10px;
-            margin: 50px auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        h2 {
+        .checkout h2 {
             text-align: center;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        table {
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        .quantity {
+            width: 100px;
+        }
+
+        .payment-box {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            margin-bottom: 10px;
+        }
+
+        .payment-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .orderbtn {
+            width: 100%;
+            height: 45px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .cancelbtn {
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            background-color: #777;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #orderMessage {
+            color: green;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
             margin-top: 20px;
-            border-collapse: collapse;
         }
 
-        th, td {
-            padding: 8px;
+        .order-summary {
+            background-color: #f1f1f1;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .checkout {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .product-card {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
         }
 
     </style>
@@ -67,303 +171,323 @@
 
 <body>
 
+
+    <!-- PRODUCT -->
+
     <div class="product-card">
 
-    <img
-        src="WhatsApp Image 2026-08-14 at 20.34.00.jpeg"
-        alt="Necklace"
-        width="250"
-    >
+        <img
+            src="WhatsApp Image 2026-08-14 at 20.34.00.jpeg"
+            alt="Necklace"
+        >
 
-    <h2>Necklace</h2>
+        <h2>Necklace</h2>
 
-    <h3>₹199</h3>
+        <div class="price">
+            ₹199
+        </div>
 
-    <button type="button" onclick="buyNow()">
-        Buy Now
-    </button>
+        <button
+            type="button"
+            class="buybtn"
+            onclick="buyNow()"
+        >
+            Buy Now
+        </button>
 
-</div>
+    </div>
 
-    <h2>Registration Form</h2>
 
-    <form class="formbox">
-        
-        <img src="WhatsApp Image 2026-08-14 at 16.54.36.jpeg" alt="My Photo" width="150">
+    <!-- CHECKOUT FORM -->
+
+    <div class="checkout" id="checkout">
+
+        <h2>Order Details</h2>
+
+
+        <div class="order-summary">
+
+            <strong>Product:</strong> Necklace
+            <br><br>
+
+            <strong>Price:</strong> ₹199
+
+        </div>
+
+
+        <label>Quantity:</label>
+
+        <input
+            class="quantity"
+            id="quantity"
+            type="number"
+            min="1"
+            value="1"
+            oninput="calculateTotal()"
+        >
+
+
+        <p>
+            <strong>Total Amount:</strong>
+            ₹<span id="total">199</span>
+        </p>
+
 
         <label>Name:</label>
-        <input class="namebox" id="name" type="text">
 
-        <br><br>
-
-        <label>Mobile:</label>
         <input
-            id="mobile"
+            id="customerName"
+            type="text"
+            placeholder="Enter your name"
+        >
+
+
+        <label>Mobile Number:</label>
+
+        <input
+            id="customerMobile"
             type="text"
             maxlength="10"
+            placeholder="Enter 10 digit mobile number"
             oninput="this.value=this.value.replace(/[^0-9]/g,'')"
         >
 
-        <br><br>
 
-        <label>Email:</label>
-        <input id="email" type="email">
+        <label>Full Address:</label>
 
-        <br><br>
+        <textarea
+            id="address"
+            placeholder="House No., Street, Area, City"
+        ></textarea>
 
-        <label>Password:</label>
-        <input id="password" type="password">
 
-        <button type="button" onclick="showPassword(this)">Show</button>
-
-        <br><br>
+        <label>Pincode:</label>
 
         <input
-            class="submitbtn"
-            type="submit"
-            value="Submit"
-            onclick="submitForm(event)"
-        >
-        
-        <br>
-
-        <input
+            id="pincode"
             type="text"
-            id="search"
-            placeholder="Search Name..."
-            oninput="searchName()"
+            maxlength="6"
+            placeholder="Enter 6 digit pincode"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
         >
 
-        <br>
 
-        <button type="button" onclick="clearSearch()">Clear Search</button>
+        <label>Payment Method:</label>
 
-        <br><br>
+        <div class="payment-box">
 
-        <p id="message"></p>
+            <div class="payment-option">
 
-        <br>
+                <input
+                    type="radio"
+                    id="cod"
+                    name="payment"
+                    value="COD"
+                    checked
+                >
 
-        <button type="button" onclick="clearForm()">Clear Form</button>
+                <label for="cod">
+                    Cash on Delivery
+                </label>
 
-        <br><br>
+            </div>
 
-        <table border="1" id="dataTable">
 
-            <tr>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
+            <div class="payment-option">
 
-        </table>
+                <input
+                    type="radio"
+                    id="upi"
+                    name="payment"
+                    value="UPI"
+                >
 
-    </form>
+                <label for="upi">
+                    UPI / Online Payment
+                </label>
 
-    function buyNow() {
+            </div>
 
-        document.getElementById("name").scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
+        </div>
 
-        document.getElementById("name").focus();
 
-    }
+        <button
+            type="button"
+            class="orderbtn"
+            onclick="placeOrder()"
+        >
+            Place Order
+        </button>
+
+
+        <button
+            type="button"
+            class="cancelbtn"
+            onclick="closeCheckout()"
+        >
+            Cancel
+        </button>
+
+
+        <p id="orderMessage"></p>
+
+    </div>
+
 
     <script>
 
-        let editingRow = null;
 
+        function buyNow() {
 
-        function showPassword(button) {
+            let checkout = document.getElementById("checkout");
 
-            let password = document.getElementById("password");
+            checkout.style.display = "block";
 
-            if (password.type === "password") {
-
-                password.type = "text";
-                button.innerText = "Hide";
-
-            } else {
-
-                password.type = "password";
-                button.innerText = "Show";
-
-            }
+            checkout.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
 
         }
 
 
-        function submitForm(event) {
+        function closeCheckout() {
 
-            event.preventDefault();
+            document.getElementById("checkout").style.display = "none";
 
-            let name = document.getElementById("name").value;
-            let mobile = document.getElementById("mobile").value;
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
+        }
 
 
-            if (name == "") {
+        function calculateTotal() {
+
+            let quantity =
+                Number(document.getElementById("quantity").value);
+
+            if (quantity < 1 || isNaN(quantity)) {
+
+                quantity = 1;
+
+                document.getElementById("quantity").value = 1;
+
+            }
+
+            let total = quantity * 199;
+
+            document.getElementById("total").innerText = total;
+
+        }
+
+
+        function placeOrder() {
+
+            let name =
+                document.getElementById("customerName").value.trim();
+
+            let mobile =
+                document.getElementById("customerMobile").value.trim();
+
+            let address =
+                document.getElementById("address").value.trim();
+
+            let pincode =
+                document.getElementById("pincode").value.trim();
+
+            let quantity =
+                Number(document.getElementById("quantity").value);
+
+            let payment =
+                document.querySelector(
+                    'input[name="payment"]:checked'
+                ).value;
+
+
+            if (name === "") {
 
                 alert("Please enter your name");
+                return;
 
             }
 
-            else if (mobile == "") {
+
+            if (mobile === "") {
 
                 alert("Please enter your mobile number");
+                return;
 
             }
 
-            else if (mobile.length != 10) {
+
+            if (mobile.length !== 10) {
 
                 alert("Mobile number must be 10 digits");
+                return;
 
             }
 
-            else if (email == "") {
 
-                alert("Please enter your email");
+            if (address === "") {
 
-            }
-
-            else if (!email.includes("@") || !email.includes(".")) {
-
-                alert("Please enter a valid email");
+                alert("Please enter your full address");
+                return;
 
             }
 
-            else if (password == "") {
 
-                alert("Please enter your password");
+            if (pincode === "") {
 
-            }
-
-            else if (password.length < 6) {
-
-                alert("Password must be at least 6 characters");
+                alert("Please enter your pincode");
+                return;
 
             }
 
-            else {
 
-                document.getElementById("message").innerText =
-                    "Registration Successful!";
+            if (pincode.length !== 6) {
 
-
-                if (editingRow != null) {
-
-                    editingRow.cells[0].innerText = name;
-                    editingRow.cells[1].innerText = mobile;
-                    editingRow.cells[2].innerText = email;
-
-                    editingRow = null;
-
-                }
-
-                else {
-
-                    let table = document.getElementById("dataTable");
-
-                    let row = table.insertRow();
-
-                    row.insertCell(0).innerText = name;
-                    row.insertCell(1).innerText = mobile;
-                    row.insertCell(2).innerText = email;
-
-                    let actionCell = row.insertCell(3);
-
-                    actionCell.innerHTML =
-                        '<button type="button" onclick="editRow(this)">Edit</button> ' +
-                        '<button type="button" onclick="deleteRow(this)">Delete</button>';
-
-                }
+                alert("Pincode must be 6 digits");
+                return;
 
             }
+
+
+            if (quantity < 1) {
+
+                alert("Quantity must be at least 1");
+                return;
+
+            }
+
+
+            let total = quantity * 199;
+
+
+            if (payment === "UPI") {
+
+                alert(
+                    "UPI payment setup will be connected next.\n\n" +
+                    "Order Amount: ₹" + total
+                );
+
+                return;
+
+            }
+
+
+            document.getElementById("orderMessage").innerText =
+                "Order Placed Successfully! " +
+                "Total Amount: ₹" + total +
+                " | Payment: Cash on Delivery";
+
+
+            document.getElementById("customerName").value = "";
+            document.getElementById("customerMobile").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("pincode").value = "";
+            document.getElementById("quantity").value = 1;
+
+            document.getElementById("total").innerText = 199;
 
         }
 
-
-        function deleteRow(button) {
-
-            let row = button.parentElement.parentElement;
-
-            row.remove();
-
-        }
-
-
-        function editRow(button) {
-
-            let row = button.parentElement.parentElement;
-
-            editingRow = row;
-
-            document.getElementById("name").value =
-                row.cells[0].innerText;
-
-            document.getElementById("mobile").value =
-                row.cells[1].innerText;
-
-            document.getElementById("email").value =
-                row.cells[2].innerText;
-
-        }
-
-            function clearForm() {
-
-                document.getElementById("name").value = "";
-                document.getElementById("mobile").value = "";
-                document.getElementById("email").value = "";
-                document.getElementById("password").value = "";
-                document.getElementById("message").innerText = "";
-                editingRow = null;
-       }
-          
-           function searchName() {
-
-               let searchValue = document.getElementById("search").value.toLowerCase();
-
-               let table = document.getElementById("dataTable");
-
-               let rows = table.getElementsByTagName("tr");
-
-               for (let i = 1; i < rows.length; i++) {
-
-                    let name = rows[i].cells[0].innerText.toLowerCase();
-
-                    if (name.includes(searchValue)) {
-
-                        rows[i].style.display = "";
-
-                    } else {
-
-                        rows[i].style.display = "none";
-
-                    }
-
-               }
-
-           }
-
-          function clearSearch() {
-
-              document.getElementById("search").value = "";
-
-              searchName();
-
-          }
-
-         function buyNow() {
-
-             document.getElementById("name").scrollIntoView();
-
-             document.getElementById("name").focus();
-
-         }
 
     </script>
 
