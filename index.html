@@ -79,7 +79,7 @@
 
     <h3>₹199</h3>
 
-    <button type="button" onclick="alert('Buy Now Working')">
+    <button type="button" onclick="buyNow()">
         Buy Now
     </button>
 
@@ -161,6 +161,16 @@
 
     </form>
 
+    function buyNow() {
+
+        document.getElementById("name").scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        document.getElementById("name").focus();
+
+    }
 
     <script>
 
