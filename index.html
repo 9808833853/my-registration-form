@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -334,13 +335,9 @@
 
     <script>
 
-        // ==========================================
-        // APNA WHATSAPP NUMBER YAHAN DAALO
-        // Country code ke saath, + ke bina
-        // Example: 919876543210
-        // ==========================================
+        // YOUR WHATSAPP NUMBER
 
-        const whatsappNumber = "919XXXXXXXXX";
+        const whatsappNumber = "919808833853";
 
 
         function buyNow() {
@@ -417,8 +414,6 @@
                 ).value;
 
 
-            // NAME CHECK
-
             if (name === "") {
 
                 alert("Please enter your name");
@@ -426,8 +421,6 @@
 
             }
 
-
-            // MOBILE CHECK
 
             if (mobile === "") {
 
@@ -445,8 +438,6 @@
             }
 
 
-            // ADDRESS CHECK
-
             if (address === "") {
 
                 alert("Please enter your full address");
@@ -454,8 +445,6 @@
 
             }
 
-
-            // PINCODE CHECK
 
             if (pincode === "") {
 
@@ -473,8 +462,6 @@
             }
 
 
-            // QUANTITY CHECK
-
             if (quantity < 1) {
 
                 alert("Quantity must be at least 1");
@@ -483,12 +470,8 @@
             }
 
 
-            // TOTAL
-
             let total = quantity * 199;
 
-
-            // WHATSAPP MESSAGE
 
             let message =
                 "NEW ORDER\n\n" +
@@ -514,8 +497,6 @@
                 "Payment Method: " + payment;
 
 
-            // WHATSAPP LINK
-
             let whatsappURL =
                 "https://wa.me/" +
                 whatsappNumber +
@@ -523,14 +504,10 @@
                 encodeURIComponent(message);
 
 
-            // SUCCESS MESSAGE
-
             document.getElementById("orderMessage")
                 .innerText =
                 "Order details ready. Opening WhatsApp...";
 
-
-            // OPEN WHATSAPP
 
             window.open(
                 whatsappURL,
@@ -543,3 +520,4 @@
 
 </body>
 </html>
+```
